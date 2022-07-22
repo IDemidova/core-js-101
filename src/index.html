@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function angleBetweenClockHands(date) {
+            const hoursAngle = (0.5 * (60 * date.getUTCHours() + date.getMinutes()) % 360);
+            const minutesAngle = 6 * date.getMinutes();
+            let angle = Math.abs(hoursAngle - minutesAngle);
+            if (angle > 180) {
+                angle = 360 - angle;
+            }
+            const radians = Math.PI / 180;
+            return angle * radians;
+        }
+
+        console.log(angleBetweenClockHands(new Date(Date.UTC(2016, 2, 5, 0, 0))))
+    </script>
+</body>
+
+</html>
