@@ -288,8 +288,21 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  if (arr.length === 0 || arr.length === 1) {
+    return arr;
+  }
+
+  return arr
+    .map((element, index) => `${element},`.repeat(index + 1).split(',').filter((el) => el !== ''))
+    .flat()
+    .map((element) => {
+      if (element === 'null') {
+        return null;
+      }
+
+      return element;
+    });
 }
 
 /**

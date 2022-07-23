@@ -10,32 +10,15 @@
 
 <body>
     <script>
-        function isCreditCardNumber(ccn) {
-            const cardNum = ccn.toString();
-            console.log(cardNum);
-            let checkNum = 0;
-
-            for (let i = 0; i < cardNum.length; i += 1) {
-                let digit = parseInt(cardNum.charAt(i), 10);
-                console.log(i + ':' + digit);
-
-                if (i % 2 !== 0) {
-                    digit *= 2;
-
-                    if (digit > 9) {
-                        digit -= 9;
-                    }
-                }
-
-                console.log('digit:' + digit);
-                checkNum += digit;
+        function propagateItemsByPositionIndex(arr) {
+            if (arr.length === 0 || arr.length === 1) {
+                return arr;
             }
 
-            console.log(checkNum)
-            return (checkNum % 10) === 0;
+            return arr.map((element, index) => `${element},`.repeat(index + 1).split(',').filter((element) => element !== '')).flat();
         }
 
-        console.log(isCreditCardNumber(79927398713));
+        console.log(propagateItemsByPositionIndex(['a', 'b', 'c', null]));
     </script>
 </body>
 
