@@ -232,8 +232,28 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let result = '';
+
+  if (isStartIncluded) {
+    result += '[';
+  } else {
+    result += '(';
+  }
+
+  if (a < b) {
+    result += `${a}, ${b}`;
+  } else {
+    result += `${b}, ${a}`;
+  }
+
+  if (isEndIncluded) {
+    result += ']';
+  } else {
+    result += ')';
+  }
+
+  return result;
 }
 
 /**
@@ -475,8 +495,34 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const colsM1 = m1[0].length;
+  const rowsM1 = m1.length;
+  const rowsM2 = m2.length;
+  const colsM2 = m2[0].length;
+  const resultM = [];
+
+  if (colsM1 !== rowsM2) {
+    return false;
+  }
+
+  for (let i = 0; i < rowsM1; i += 1) {
+    resultM[i] = [];
+  }
+
+  for (let i = 0; i < colsM2; i += 1) {
+    for (let j = 0; j < rowsM1; j += 1) {
+      let ceil = 0;
+
+      for (let k = 0; k < rowsM2; k += 1) {
+        ceil += m1[j][k] * m2[k][i];
+      }
+
+      resultM[j][i] = ceil;
+    }
+  }
+
+  return resultM;
 }
 
 /**
