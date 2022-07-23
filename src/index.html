@@ -10,15 +10,36 @@
 
 <body>
     <script>
-        function propagateItemsByPositionIndex(arr) {
-            if (arr.length === 0 || arr.length === 1) {
-                return arr;
-            }
-
-            return arr.map((element, index) => `${element},`.repeat(index + 1).split(',').filter((element) => element !== '')).flat();
+        function group(array, keySelector, valueSelector) {
+            return array.reduce((element, item) => {
+                const key = keySelector(item);
+                const obj = element;
+                obj[key] = element[key] || [];
+                obj[key].push(valueSelector(item));
+                return obj;
+            }, {});
         }
 
-        console.log(propagateItemsByPositionIndex(['a', 'b', 'c', null]));
+        // function group(array, keySelector, valueSelector) {
+        //     const map = new Map();
+        //     return array.reduce((element, item) => {
+        //         const key = keySelector(item);
+        //         map.set(key, element[key] || []);
+        //         map.get(key).push(valueSelector(item));
+        //         return map;
+        //     }, map);
+        // }
+
+        console.log(group([
+            { country: 'Belarus', city: 'Brest' },
+            { country: 'Russia', city: 'Omsk' },
+            { country: 'Russia', city: 'Samara' },
+            { country: 'Belarus', city: 'Grodno' },
+            { country: 'Belarus', city: 'Minsk' },
+            { country: 'Poland', city: 'Lodz' }
+        ],
+            item => item.country,
+            item => item.city));
     </script>
 </body>
 
