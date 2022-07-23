@@ -10,18 +10,32 @@
 
 <body>
     <script>
-        function angleBetweenClockHands(date) {
-            const hoursAngle = (0.5 * (60 * date.getUTCHours() + date.getMinutes()) % 360);
-            const minutesAngle = 6 * date.getMinutes();
-            let angle = Math.abs(hoursAngle - minutesAngle);
-            if (angle > 180) {
-                angle = 360 - angle;
+        function isCreditCardNumber(ccn) {
+            const cardNum = ccn.toString();
+            console.log(cardNum);
+            let checkNum = 0;
+
+            for (let i = 0; i < cardNum.length; i += 1) {
+                let digit = parseInt(cardNum.charAt(i), 10);
+                console.log(i + ':' + digit);
+
+                if (i % 2 !== 0) {
+                    digit *= 2;
+
+                    if (digit > 9) {
+                        digit -= 9;
+                    }
+                }
+
+                console.log('digit:' + digit);
+                checkNum += digit;
             }
-            const radians = Math.PI / 180;
-            return angle * radians;
+
+            console.log(checkNum)
+            return (checkNum % 10) === 0;
         }
 
-        console.log(angleBetweenClockHands(new Date(Date.UTC(2016, 2, 5, 0, 0))))
+        console.log(isCreditCardNumber(79927398713));
     </script>
 </body>
 
