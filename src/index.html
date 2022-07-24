@@ -10,36 +10,11 @@
 
 <body>
     <script>
-        function group(array, keySelector, valueSelector) {
-            return array.reduce((element, item) => {
-                const key = keySelector(item);
-                const obj = element;
-                obj[key] = element[key] || [];
-                obj[key].push(valueSelector(item));
-                return obj;
-            }, {});
+        function getElementByIndexes(arr, indexes) {
+            return indexes.reduce((obj, prop) => obj[prop], arr);
         }
 
-        // function group(array, keySelector, valueSelector) {
-        //     const map = new Map();
-        //     return array.reduce((element, item) => {
-        //         const key = keySelector(item);
-        //         map.set(key, element[key] || []);
-        //         map.get(key).push(valueSelector(item));
-        //         return map;
-        //     }, map);
-        // }
-
-        console.log(group([
-            { country: 'Belarus', city: 'Brest' },
-            { country: 'Russia', city: 'Omsk' },
-            { country: 'Russia', city: 'Samara' },
-            { country: 'Belarus', city: 'Grodno' },
-            { country: 'Belarus', city: 'Minsk' },
-            { country: 'Poland', city: 'Lodz' }
-        ],
-            item => item.country,
-            item => item.city));
+        getElementByIndexes([[1, 2], [3, 4], [5, 6]], [0, 0])
     </script>
 </body>
 

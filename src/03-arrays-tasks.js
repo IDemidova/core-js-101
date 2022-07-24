@@ -572,8 +572,11 @@ function group(array, keySelector, valueSelector) {
   const result = array.reduce((element, item) => {
     const key = keySelector(item);
     const obj = element;
+
     obj[key] = element[key] || [];
+
     obj[key].push(valueSelector(item));
+
     return obj;
   }, {});
 
@@ -609,8 +612,8 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((element, index) => element[index], arr);
 }
 
 /**
